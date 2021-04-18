@@ -9,11 +9,7 @@ function App() {
   const [data, setData] = useState();
   const [test, setTest] = useState();
   useEffect(() => {
-    Frames(configData.prodIP, setData, setSrc).start();
-    // axios.get('ws://127.0.0.1:4444/twod')
-    //   .then(dat => {
-    //     console.log(dat);
-    //   });
+    Frames(configData.devIP, setData, setSrc).start();
   }, []);
 
   // console.log(data);
@@ -21,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <img src={src} />
+      <img className="live" src={src} alt="live display" />
       {data && data.people
         ? Object.keys(data.people).map((person) => {
             // console.log(data.people[person]);
