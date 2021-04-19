@@ -7,6 +7,7 @@ import configData from "./config.json";
 function App() {
   const [live, setLive] = useState();
   const [exercise, setExercise] = useState();
+  const [present, setPresent] = useState(false);
   const [liveData, setLiveData] = useState();
   const [exeData, setExeData] = useState();
 
@@ -15,34 +16,27 @@ function App() {
     Exercises(setExeData, setExercise).start();
   }, []);
 
+  useEffect(() => {
+    if (liveData && liveData.people) {
+      Object.keys(liveData.people).forEach((person) => {
+        const keypoints = liveData.people[person].keypoints;
+        if (keypoints.RElbow && keypoints.LElbow) {
+          // setPresent(true);
+        }
+        // need to set present to false when people are not in view
+      });
+    }
+  }, [liveData]);
+
   return (
-    <div className="App">
+    <div className="view">
       <img className="live" src={live} alt="live feed" />
-      {/* {liveData && liveData.people
-        ? Object.keys(liveData.people).map((person) => {
-            // console.log(liveData.people[person]);
-            const keypoints = liveData.people[person].keypoints;
-            if (keypoints.RElbow && keypoints.LElbow)
-              return (
-                <div>
-                  <div>Person {person}</div>
-                  <div>X-Coordinate: {keypoints.RElbow[0].toFixed(2)}</div>
-                  <div>Y-Coordinate: {keypoints.RElbow[1].toFixed(2)}</div>
-                  <div>Z-Coordinate: {keypoints.RElbow[2].toFixed(2)}</div>
-                  <div>
-                    {keypoints.RElbow[1] < 0 && keypoints.LElbow[1] < 0
-                      ? "Both Arms Raised!"
-                      : keypoints.RElbow[1] < 0
-                      ? "Right Arm Raised!"
-                      : keypoints.LElbow[1] < 0
-                      ? "Left Arm Raised!"
-                      : "Nothing"}
-                  </div>
-                </div>
-              );
-          })
-        : null} */}
-      <img className="exercise" src={exercise} alt="exercise feed" />
+      {
+      present
+        ? 
+          <img className="exercise" src={exercise} alt="exercise feed" />
+        : <h1>No one present</h1>
+      }   
     </div>
   );
 }
