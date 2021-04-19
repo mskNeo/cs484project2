@@ -1,16 +1,14 @@
-function Frames(ip, setData, setSrc) {
+function Frames(ip, setData, setLive) {
   const url_frames = (ip) => `ws://${ip}:8888/frames`;
   const url_twod = (ip) => `ws://${ip}:8888/twod`;
-  const recordedFr = 'ws://127.0.0.1:4444/frames';
-  const recorded2D = 'ws://127.0.0.1:4444/twod';
 
   const framesObj = {
     socket_frames: null,
     socket_twod: null,
 
     start: () => {
-      framesObj.socket_frames = new WebSocket(recordedFr);
-      framesObj.socket_twod = new WebSocket(recorded2D);
+      framesObj.socket_frames = new WebSocket(url_frames(ip));
+      framesObj.socket_twod = new WebSocket(url_twod(ip));
       framesObj.socket_frames.onmessage = function (event) {
         framesObj.store(JSON.parse(event.data));
       };
@@ -20,7 +18,7 @@ function Frames(ip, setData, setSrc) {
     },
 
     show: (frame) => {
-      setSrc("data:image/pnjpegg;base64," + frame.src);
+      setLive("data:image/pnjpegg;base64," + frame.src);
     },
 
     store: (frame) => {
