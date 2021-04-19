@@ -7,11 +7,12 @@ import configData from "./config.json";
 function App() {
   const [live, setLive] = useState();
   const [exercise, setExercise] = useState();
-  const [data, setData] = useState();
+  const [liveData, setLiveData] = useState();
+  const [exeData, setExeData] = useState();
 
   useEffect(() => {
-    Frames(configData.prodIP, setData, setLive).start();
-    Exercises(setData, setExercise).start();
+    Frames(configData.prodIP, setLiveData, setLive).start();
+    Exercises(setExeData, setExercise).start();
   }, []);
 
   return (
