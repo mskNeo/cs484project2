@@ -21,12 +21,19 @@ function App() {
       Object.keys(liveData.people).forEach((person) => {
         const keypoints = liveData.people[person].keypoints;
         if (keypoints.RElbow && keypoints.LElbow) {
-          // setPresent(true);
+          if (keypoints.RElbow[1] < 0 && keypoints.LElbow[1] < 0) {
+            setPresent(true);
+          }
         }
-        // need to set present to false when people are not in view
       });
+    } else {
+      setPresent(false);
     }
   }, [liveData]);
+
+  useEffect(() => {
+    console.log(exeData);
+  }, [exeData]);
 
   return (
     <div className="view">
@@ -35,7 +42,7 @@ function App() {
       present
         ? 
           <img className="exercise" src={exercise} alt="exercise feed" />
-        : <h1>No one present</h1>
+        : <h1>Raise your elbows</h1>
       }   
     </div>
   );
