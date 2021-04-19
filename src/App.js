@@ -17,9 +17,8 @@ function App() {
 
   return (
     <div className="App">
-      <div>Live Feed</div>
       <img className="live" src={live} alt="live feed" />
-      {liveData && liveData.people
+      {/* {liveData && liveData.people
         ? Object.keys(liveData.people).map((person) => {
             // console.log(liveData.people[person]);
             const keypoints = liveData.people[person].keypoints;
@@ -42,7 +41,7 @@ function App() {
                 </div>
               );
           })
-        : null}
+        : null} */}
       <img className="exercise" src={exercise} alt="exercise feed" />
     </div>
   );
