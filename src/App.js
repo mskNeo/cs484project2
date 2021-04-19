@@ -7,7 +7,7 @@ import configData from "./config.json";
 function App() {
   const [live, setLive] = useState();
   const [exercise, setExercise] = useState();
-  const [present, setPresent] = useState(false);
+  const [start, setStart] = useState(false);
   const [liveData, setLiveData] = useState();
   const [exeData, setExeData] = useState();
 
@@ -22,12 +22,12 @@ function App() {
         const keypoints = liveData.people[person].keypoints;
         if (keypoints.RElbow && keypoints.LElbow) {
           if (keypoints.RElbow[1] < 0 && keypoints.LElbow[1] < 0) {
-            setPresent(true);
+            setStart(true);
           }
         }
       });
     } else {
-      setPresent(false);
+      setStart(false);
     }
   }, [liveData]);
 
@@ -39,7 +39,7 @@ function App() {
     <div className="view">
       <img className="live" src={live} alt="live feed" />
       {
-      present
+      start
         ? 
           <img className="exercise" src={exercise} alt="exercise feed" />
         : <h1>Raise your elbows</h1>
