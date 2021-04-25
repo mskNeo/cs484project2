@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Frames from "./Frames";
-import Exercises from './Exercises';
+import Exercises from "./Exercises";
 import configData from "./config.json";
+import moment from "moment";
 
 function App() {
   const [live, setLive] = useState();
@@ -11,6 +12,7 @@ function App() {
   const [start, setStart] = useState(false);
   const [liveData, setLiveData] = useState();
   const [exeData, setExeData] = useState();
+  const [start_time, setStartTime] = useState();
 
   useEffect(() => {
     Frames(configData.prodIP, setLiveData, setLive).start();
@@ -36,15 +38,18 @@ function App() {
           else {
             setStart(true);
             setMessage("");
+            setStartTime(Date.now());
           }
         }
       });
     }
-  }, [liveData, message]);
-
-  // useEffect(() => {
-  //   console.log(exeData);
-  // }, [exeData]);
+  }, [liveData, message, start]);
+  
+  const timer = moment().diff(start_time, "seconds");
+  if (timer === 30) {
+    setStart(0);
+    setStartTime(null);
+  }
 
   return (
     <div className="view">
@@ -52,7 +57,10 @@ function App() {
       {
       start
         ? 
-          <img className="exercise" src={exercise} alt="exercise feed" />
+          <>
+            {start_time ? <div>{30 - timer}</div> : null}
+            <img className="exercise" src={exercise} alt="exercise feed" />
+          </>
         : <h1>{message}</h1>
       }   
     </div>
