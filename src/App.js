@@ -8,7 +8,7 @@ import moment from "moment";
 function App() {
   const [live, setLive] = useState();
   const [exercise, setExercise] = useState();
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("Come workout with us!");
   const [start, setStart] = useState(false);
   const [liveData, setLiveData] = useState();
   const [exeData, setExeData] = useState();
@@ -28,7 +28,7 @@ function App() {
       Object.keys(liveData.people).forEach((person) => {
         const pos = liveData.people[person].avg_position;
         const keypoints = liveData.people[person].keypoints;
-        if (keypoints.RElbow && keypoints.LElbow) {
+        if (keypoints.RElbow && keypoints.LElbow && !start) {
           if (keypoints.RElbow[1] >= 0 && keypoints.LElbow[1] >= 0) {
             setMessage("Raise your elbows high like you're trying to touch the sky.");
           }
