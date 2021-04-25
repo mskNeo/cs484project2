@@ -44,7 +44,7 @@ function App() {
       start
         ? 
           <img className="exercise" src={exercise} alt="exercise feed" />
-        : <h1>Raise your elbows to start</h1>
+        : <h1>Raise your hands straight up like you're going to touch the sky.</h1>
       }   
     </div>
   );
