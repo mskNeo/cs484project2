@@ -62,7 +62,7 @@ function App() {
             {start_time ? <div id="timer">{30 - timer}</div> : null}
             <img className="exercise" src={exercise} alt="exercise feed" />
           </>
-        : <h1>{message}</h1>
+        : <h1 id="message">{message}</h1>
       }   
     </div>
   );
