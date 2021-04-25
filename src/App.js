@@ -17,11 +17,13 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log(liveData);
     if (liveData && liveData.people) {
       Object.keys(liveData.people).forEach((person) => {
+        const pos = liveData.people[person].avg_position;
         const keypoints = liveData.people[person].keypoints;
         if (keypoints.RElbow && keypoints.LElbow) {
-          if (keypoints.RElbow[1] < 0 && keypoints.LElbow[1] < 0) {
+          if (keypoints.RElbow[1] < 0 && keypoints.LElbow[1] < 0 && pos[2] <= 3350) {
             setStart(true);
           }
         }
@@ -31,9 +33,9 @@ function App() {
     }
   }, [liveData]);
 
-  useEffect(() => {
-    console.log(exeData);
-  }, [exeData]);
+  // useEffect(() => {
+  //   console.log(exeData);
+  // }, [exeData]);
 
   return (
     <div className="view">
@@ -42,7 +44,7 @@ function App() {
       start
         ? 
           <img className="exercise" src={exercise} alt="exercise feed" />
-        : <h1>Raise your elbows</h1>
+        : <h1>Raise your elbows to start</h1>
       }   
     </div>
   );
