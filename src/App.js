@@ -15,7 +15,7 @@ function App() {
   const [live, setLive] = useState();
   const [message, setMessage] = useState("Come workout with us!");
   const [exercise, setExercise] = useState(0);
-  const [start, setStart] = useState(true);
+  const [start, setStart] = useState(false);
   const [liveData, setLiveData] = useState();
   const [exeData, setExeData] = useState();
   const [start_time, setStartTime] = useState();
@@ -41,14 +41,15 @@ function App() {
       Object.keys(liveData.people).forEach((person) => {
         const pos = liveData.people[person].avg_position;
         const keypoints = liveData.people[person].keypoints;
-        if (keypoints.RElbow && keypoints.LElbow && !start) {
+        if (keypoints.RElbow && keypoints.RShoulder && keypoints.LElbow && keypoints.LShoulder && !start) {
           // if wrists are above people's eyes/heads, they're up
-          if (keypoints.RWrist[1] >= keypoints.REye[1] && keypoints.LWrist[1] >= keypoints.LEye[1]) {
-            setMessage(
-              "Raise your elbows high like you're trying to touch the sky."
-            );
-          } else if (pos[2] > 3350) {
+          if (pos[2] > 3350) {
             setMessage("Come closer with your hands up, we won't bite ;)");
+            
+          } else if (keypoints.RElbow[1] >= keypoints.RShoulder[1] && keypoints.LElbow[1] >= keypoints.LShoulder[1]) {
+            setMessage(
+              "Raise your hands high like you're trying to touch the sky."
+            );
           } else {
             // setMessage("Ok, put your hands down.");
             // setTimeout(() => {
@@ -76,21 +77,29 @@ function App() {
   if (timer === 30) {
     setStart(false);
     setStartTime(null);
+
+    setMessage("You're done! Go enjoy your day :)");
+
+    setTimeout(() => {
+      setMessage("Come workout with us!");
+    }, 3000);
   }
+  
 
   return (
     <div className="view">
-      <img className="live" src={live} alt="live feed" />
-      {start ? (
-        <>
-          {start_time ? <div>{30 - timer}</div> : null}
-          <img className="exercise" src={`data:image/pnjpegg;base64,${
-              twods[exercise][frame_index % twods[exercise].length].src
-            }`} alt="exercise feed" />
-        </>
-      ) : (
-        <h1>{message}</h1>
-      )}
+      {start 
+        ? 
+          <>
+            <img className="live" src={live} alt="live feed" />
+            {start_time ? <div id="timer">{30 - timer}</div> : null}
+            <img className="exercise" src={`data:image/pnjpegg;base64,${
+                twods[exercise][frame_index % twods[exercise].length].src
+              }`} alt="exercise feed" />
+          </>
+        : 
+          <h1>{message}</h1>
+      }
     </div>
   );
 }
