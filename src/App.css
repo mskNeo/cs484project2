@@ -15,6 +15,7 @@
 .exercise {
   height: 100%;
   width: 100%;
+  filter: brightness(0.5);
 }
 
 .live {
@@ -33,12 +34,13 @@
   color: red;
   font-size: 7vh;
   position: fixed;
+  z-index: 69;
   top: 20px;
   left: calc(50vw - 3.5vh);
 }
 
 #message {
-  font-size: 15vh;
-  width: 70vw;
+  font-size: 10vh;
+  width: 90vw;
   text-align: center;
 }
