@@ -39,6 +39,16 @@
   left: calc(50vw - 3.5vh);
 }
 
+#encourage {
+  color: rgb(71, 255, 71);
+  font-size: 7vh;
+  position: fixed;
+  z-index: 69;
+  top: calc(15vh);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #message {
   font-size: 10vh;
   width: 90vw;
