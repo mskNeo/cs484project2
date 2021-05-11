@@ -19,7 +19,7 @@ exercises.forEach((exercise) => {
 
 function App() {
   const [live, setLive] = useState();
-  const [message, setMessage] = useState("Pick an exercise by copying the images below.");
+  const [message, setMessage] = useState("Come workout with us!");
   const [exercise, setExercise] = useState(0);
   const [start, setStart] = useState(false);
   const [select, setSelect] = useState(false);
@@ -105,7 +105,7 @@ function App() {
                 keypoints.RElbow[1] > keypoints.RShoulder[1] &&
                 keypoints.LElbow[1] > keypoints.LShoulder[1]
               ) {
-                setMessage("Pick an exercise by copying the images below.");
+                setMessage("Pick an exercise by copying the images.");
               } // both hands, hard exercise
               else if (
                 ready &&
@@ -200,10 +200,10 @@ function App() {
           />
         </>
       ) : (
-        <div>
+        <div class="intro">
           <h1 id="message">{message}</h1>
           <br />
-          {message === "Pick an exercise by copying the images below." && (
+          {message === "Pick an exercise by copying the images." && (
             <div id="exercises">
               <div className="choice">
                 <img src={easy} alt="easy hands" />
