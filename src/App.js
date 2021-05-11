@@ -3,6 +3,9 @@ import "./App.css";
 import Frames from "./Frames";
 import configData from "./config.json";
 import moment from "moment";
+import easy from './assets/right.png'
+import med from './assets/left.png'
+import hard from './assets/both.png'
 
 const exercises = ["arm_circles", "knee_drives", "jumping_jacks"];
 let twods = [];
@@ -22,7 +25,6 @@ function App() {
   const [select, setSelect] = useState(false);
   const [ready, setReady] = useState(false);
   const [liveData, setLiveData] = useState();
-  const [exeData, setExeData] = useState();
   const [start_time, setStartTime] = useState();
   const [frame_index, setFrameIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -39,9 +41,6 @@ function App() {
   }, [frame_index]);
 
   useEffect(() => {
-    // console.log(liveData);
-    // console.log(select);
-    // console.log(ready);
     const model_keys = Object.keys(
       exercise_frames[exercise][frame_index % twods[exercise].length].people
         ? exercise_frames[exercise][frame_index % twods[exercise].length].people
@@ -108,9 +107,7 @@ function App() {
                 keypoints.RElbow[1] > keypoints.RShoulder[1] &&
                 keypoints.LElbow[1] > keypoints.LShoulder[1]
               ) {
-                setMessage(
-                  "Pick an exercise. Raise your right hand for an easy one, left hand for a medium one, and both hands for a harder one."
-                );
+                setMessage("Pick an exercise by copying the images below.");
               } // both hands, hard exercise
               else if (
                 ready &&
@@ -125,7 +122,7 @@ function App() {
                   setStartTime(Date.now());
                 }, 300);
               }
-              // easy exercise
+              // right hand, easy exercise
               else if (ready && keypoints.RElbow[1] < keypoints.RShoulder[1]) {
                 setMessage("Get ready! Start, now!");
                 setTimeout(() => {
@@ -135,7 +132,7 @@ function App() {
                   setStartTime(Date.now());
                 }, 300);
               }
-              // medium one
+              // left hand, medium one
               else if (ready && keypoints.LElbow[1] < keypoints.LShoulder[1]) {
                 setMessage("Get ready! Start, now!");
                 setTimeout(() => {
@@ -208,9 +205,25 @@ function App() {
         <div>
           <h1 id="message">{message}</h1>
           <br />
+          {message === "Pick an exercise by copying the images below." && (
+            <div id="exercises">
+              <div className="choice">
+                <img src={easy} alt="easy hands" />
+                <p>Easy</p>
+              </div>
+              <div className="choice">
+                <img src={med} alt="Medium hands" />
+                <p>Medium</p>
+              </div>
+              <div className="choice">
+                <img src={hard} alt="hard hands" />
+                <p>Hard</p>
+              </div>
+            </div>
+          )}
           {message === "You're done! Go enjoy your day :)" && (
             <h1 id="message">
-              Your Score: {Math.round((1000000 - score) / 10000)}/100
+              Your Score: {Math.round((1000000 - score) / 10000)} points
             </h1>
           )}
         </div>
