@@ -19,7 +19,7 @@ exercises.forEach((exercise) => {
 
 function App() {
   const [live, setLive] = useState();
-  const [message, setMessage] = useState("Come workout with us!");
+  const [message, setMessage] = useState("Pick an exercise by copying the images below.");
   const [exercise, setExercise] = useState(0);
   const [start, setStart] = useState(false);
   const [select, setSelect] = useState(false);
@@ -88,9 +88,7 @@ function App() {
                   keypoints.LElbow[1] > keypoints.LShoulder[1]) &&
                 !select
               ) {
-                setMessage(
-                  "Raise your hands high like you're trying to touch the sky."
-                );
+                setMessage("Raise your hands high like you're trying to touch the sky.");
               } else {
                 setMessage("Ok, put your hands down.");
                 setSelect(true);
