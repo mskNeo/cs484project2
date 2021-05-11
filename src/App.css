@@ -17,8 +17,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1vh solid white;
-  border-radius: 2vh;
+  border: 5px solid white;
+  border-radius: 10px;
 }
 
 .exercise {
