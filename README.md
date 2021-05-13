@@ -4,4 +4,4 @@ CPSC 484: Intro to Human-Computer Interaction project 2.
 
 ## Usage
 
-Run the command `npm install` then `npm start` to run the entire program.
+Install dependencies first by running `yarn install` then run `yarn start` to start the program.

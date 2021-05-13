@@ -20,19 +20,20 @@ body {
 }
 
 .intro {
-  height: 90%;
+  height: 95%;
   width: 95%;
   border: 5px solid white;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: column nowrap;
 }
 
 .exercise {
   height: 100%;
   width: 100%;
-  filter: brightness(0.5);
+  filter: contrast(1.75);
   transform: scaleX(-1);
 }
 

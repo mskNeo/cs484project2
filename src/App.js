@@ -113,32 +113,26 @@ function App() {
                 keypoints.LElbow[1] < keypoints.LShoulder[1]
               ) {
                 setMessage("Get ready! Start, now!");
-                setTimeout(() => {
-                  setStart(true);
-                  setExercise(2);
-                  setMessage("");
-                  setStartTime(Date.now());
-                }, 300);
+                setStart(true);
+                setExercise(2);
+                setMessage("");
+                setStartTime(Date.now());
               }
               // right hand, easy exercise
               else if (ready && keypoints.RElbow[1] < keypoints.RShoulder[1]) {
                 setMessage("Get ready! Start, now!");
-                setTimeout(() => {
-                  setStart(true);
-                  setExercise(0);
-                  setMessage("");
-                  setStartTime(Date.now());
-                }, 300);
+                setStart(true);
+                setExercise(0);
+                setMessage("");
+                setStartTime(Date.now());
               }
               // left hand, medium one
               else if (ready && keypoints.LElbow[1] < keypoints.LShoulder[1]) {
                 setMessage("Get ready! Start, now!");
-                setTimeout(() => {
-                  setStart(true);
-                  setExercise(1);
-                  setMessage("");
-                  setStartTime(Date.now());
-                }, 300);
+                setStart(true);
+                setExercise(1);
+                setMessage("");
+                setStartTime(Date.now());
               }
             }
           }
@@ -165,13 +159,11 @@ function App() {
 
   if (timer === 30) {
     setStart(false);
-
     setStartTime(null);
-
+    setSelect(false);
     setMessage("You're done! Go enjoy your day :)");
     setTimeout(() => {
       setMessage("Come workout with us!");
-      setSelect(false);
       setReady(false);
     }, 10000);
   }
@@ -200,7 +192,7 @@ function App() {
           />
         </>
       ) : (
-        <div class="intro">
+        <div className="intro">
           <h1 id="message">{message}</h1>
           <br />
           {message === "Pick an exercise by copying the images." && (
